@@ -24,10 +24,13 @@
 </head>
 
 <body class="font-sans bg-neutral-50 text-neutral-900">
-  <div class="min-h-screen">
+  <div class="min-h-screen" style="background-color:#FFFAF0;">
     <!-- HERO -->
     <header class="relative overflow-hidden">
-      <div class="absolute inset-0 bg-gradient-to-b from-rose-50 via-neutral-50 to-neutral-50"></div>
+      <div class="absolute inset-0"
+          style="background: linear-gradient(to bottom, #FAF0E6 0%, #FFFAF0 100%);">
+      </div>
+
 
       <div class="relative mx-auto max-w-4xl px-6 pt-14 pb-10 sm:pt-20 sm:pb-14">
         <p class="text-sm tracking-[0.25em] uppercase text-neutral-600">
@@ -74,7 +77,67 @@
     <!-- CONTENIDO -->
     <main class="mx-auto max-w-4xl px-6 pb-16">
       <!-- DETALLES -->
-      <section id="detalles" class="pt-10 sm:pt-14">
+      <section class="pt-10 sm:pt-14">
+  <h2 class="font-serif text-3xl sm:text-4xl mb-8">Momentos clave</h2>
+  <ol class="relative border-l-4 border-blue-300 ml-4">
+    <!-- Evento 1: Izquierda -->
+    <li class="mb-10 ml-6 flex flex-col sm:flex-row items-start">
+      <div class="order-1 sm:order-none w-full sm:w-1/2 pr-8 text-right hidden sm:block"></div>
+      <div class="relative z-10">
+        <span class="absolute -left-6 flex items-center justify-center w-12 h-12 bg-yellow-100 rounded-full text-neutral-600 text-2xl font-bold" style="background-color:#FAF0E6;">11:00</span>
+      </div>
+      <div class="w-full sm:w-1/2 pl-14 sm:pl-16">
+        <h3 class="font-serif text-2xl mt-2">Ceremonia</h3>
+        <p class="text-lg text-neutral-700">Parroquia de San Bernardo</p>
+      </div>
+    </li>
+    <!-- Evento 2: Derecha -->
+    <li class="mb-10 ml-6 flex flex-col sm:flex-row items-start">
+      <div class="w-full sm:w-1/2 pr-16 text-right">
+        <h3 class="font-serif text-2xl mt-2">Salida de autobuses</h3>
+        <p class="text-lg text-neutral-700">De la iglesia a la hacienda</p>
+      </div>
+      <div class="relative z-10">
+        <span class="absolute -left-6 flex items-center justify-center w-12 h-12 bg-stone-200 rounded-full text-neutral-600 text-2xl font-bold">12:30</span>
+      </div>
+      <div class="order-1 sm:order-none w-full sm:w-1/2 pl-8 hidden sm:block"></div>
+    </li>
+    <!-- Evento 3: Izquierda -->
+    <li class="mb-10 ml-6 flex flex-col sm:flex-row items-start">
+      <div class="order-1 sm:order-none w-full sm:w-1/2 pr-8 text-right hidden sm:block"></div>
+      <div class="relative z-10">
+        <span class="absolute -left-6 flex items-center justify-center w-12 h-12 bg-blue-400 rounded-full text-white text-2xl font-bold">13:00</span>
+      </div>
+      <div class="w-full sm:w-1/2 pl-8">
+        <h3 class="font-serif text-2xl mt-2">Cóctel</h3>
+        <p class="text-lg text-neutral-700">Hacienda Mata del Herrador</p>
+      </div>
+    </li>
+    <!-- Evento 4: Derecha -->
+    <li class="mb-10 ml-6 flex flex-col sm:flex-row items-start">
+      <div class="w-full sm:w-1/2 pr-8 text-right">
+        <h3 class="font-serif text-2xl mt-2">Banquete</h3>
+        <p class="text-lg text-neutral-700">Salón principal</p>
+      </div>
+      <div class="relative z-10">
+        <span class="absolute -left-6 flex items-center justify-center w-12 h-12 bg-blue-300 rounded-full text-white text-2xl font-bold">15:00</span>
+      </div>
+      <div class="order-1 sm:order-none w-full sm:w-1/2 pl-8 hidden sm:block"></div>
+    </li>
+    <!-- Evento 5: Izquierda, sin línea debajo -->
+    <li class="ml-6 flex flex-col sm:flex-row items-start">
+      <div class="order-1 sm:order-none w-full sm:w-1/2 pr-8 text-right hidden sm:block"></div>
+      <div class="relative z-10">
+        <span class="absolute -left-6 flex items-center justify-center w-12 h-12 bg-blue-200 rounded-full text-blue-700 text-2xl font-bold border-4 border-blue-200">17:00</span>
+      </div>
+      <div class="w-full sm:w-1/2 pl-8">
+        <h3 class="font-serif text-2xl mt-2">Fiesta</h3>
+        <p class="text-lg text-neutral-700">Música y barra libre</p>
+      </div>
+    </li>
+  </ol>
+</section>
+<section id="detalles" class="pt-10 sm:pt-14">
         <h2 class="font-serif text-3xl sm:text-4xl">Detalles del día</h2>
         <p class="mt-3 text-neutral-700 max-w-2xl">
           Aquí tienes la información de la ceremonia y de la celebración. Si vienes en coche o necesitas ubicaciones,
