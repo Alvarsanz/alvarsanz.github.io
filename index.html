@@ -3,12 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Invitación de boda</title>
+  <title>Invitación de boda · Cris & Álvaro</title>
 
-  <!-- Tailwind CSS (rápido y gratis) -->
+  <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Tipografías (opcional pero queda muy bien) -->
+  <!-- Fuentes -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -24,7 +24,6 @@
 </head>
 
 <body class="font-sans bg-neutral-50 text-neutral-900">
-  <!-- Fondo suave -->
   <div class="min-h-screen">
     <!-- HERO -->
     <header class="relative overflow-hidden">
@@ -36,7 +35,7 @@
         </p>
 
         <h1 class="mt-4 font-serif text-4xl sm:text-6xl leading-tight">
-          Álvaro &amp; [Nombre Pareja]
+          Cris &amp; Álvaro
         </h1>
 
         <p class="mt-4 text-lg sm:text-xl text-neutral-700 max-w-2xl">
@@ -58,15 +57,15 @@
         <div class="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-4">
           <div class="rounded-2xl bg-white/80 backdrop-blur px-5 py-4 ring-1 ring-neutral-200">
             <p class="text-sm text-neutral-500">Fecha</p>
-            <p class="mt-1 font-medium">[Sábado, 00 de Mes de 2026]</p>
+            <p class="mt-1 font-medium">Sábado, 10 de octubre de 2026</p>
           </div>
           <div class="rounded-2xl bg-white/80 backdrop-blur px-5 py-4 ring-1 ring-neutral-200">
             <p class="text-sm text-neutral-500">Ceremonia</p>
-            <p class="mt-1 font-medium">[HH:MM] · Iglesia</p>
+            <p class="mt-1 font-medium">11:00 · Parroquia de San Bernardo</p>
           </div>
           <div class="rounded-2xl bg-white/80 backdrop-blur px-5 py-4 ring-1 ring-neutral-200">
             <p class="text-sm text-neutral-500">Celebración</p>
-            <p class="mt-1 font-medium">[HH:MM] · Hacienda</p>
+            <p class="mt-1 font-medium">13:00 · Hacienda</p>
           </div>
         </div>
       </div>
@@ -88,8 +87,95 @@
             <div class="flex items-center justify-between gap-4">
               <h3 class="font-serif text-2xl">Ceremonia · Iglesia</h3>
               <span class="rounded-full bg-rose-50 px-3 py-1 text-sm text-rose-700 ring-1 ring-rose-100">
-                [HH:MM]
+                11:00
               </span>
             </div>
 
             <p class="mt-4 text-neutral-700">
+              <span class="font-medium">Lugar:</span> Parroquia de San Bernardo
+            </p>
+            <p class="mt-2 text-neutral-700">
+              <span class="font-medium">Dirección:</span> C. Santo Rey, 23, 41018 Sevilla
+            </p>
+
+            <div class="mt-5 flex flex-col sm:flex-row gap-3">
+              <a href="https://maps.app.goo.gl/Mqar9GuwwqkGfR5j8" target="_blank" rel="noopener"
+                 class="inline-flex items-center justify-center rounded-xl bg-neutral-900 px-5 py-3 text-white font-medium hover:bg-neutral-800 transition">
+                Ver en Google Maps
+              </a>
+              <a href="#buses"
+                 class="inline-flex items-center justify-center rounded-xl bg-white px-5 py-3 text-neutral-900 font-medium ring-1 ring-neutral-200 hover:bg-neutral-100 transition">
+                Ver info de autobuses
+              </a>
+            </div>
+          </article>
+
+          <!-- HACIENDA -->
+          <article class="rounded-2xl bg-white p-6 ring-1 ring-neutral-200">
+            <div class="flex items-center justify-between gap-4">
+              <h3 class="font-serif text-2xl">Celebración · Hacienda</h3>
+              <span class="rounded-full bg-emerald-50 px-3 py-1 text-sm text-emerald-700 ring-1 ring-emerald-100">
+                13:00
+              </span>
+            </div>
+
+            <p class="mt-4 text-neutral-700">
+              <span class="font-medium">Lugar:</span> Hacienda Mata del Herrador
+            </p>
+            <p class="mt-2 text-neutral-700">
+              <span class="font-medium">Dirección:</span> A-4, Km 528, 41300 San José de la Rinconada, Sevilla
+            </p>
+            <p class="mt-2 text-neutral-700">
+              <span class="font-medium">Plan del evento:</span> Cóctel · Cena · Fiesta
+            </p>
+
+            <div class="mt-5 flex flex-col sm:flex-row gap-3">
+              <a href="https://maps.app.goo.gl/AE9icWAQWDBC86Kb7" target="_blank" rel="noopener"
+                 class="inline-flex items-center justify-center rounded-xl bg-neutral-900 px-5 py-3 text-white font-medium hover:bg-neutral-800 transition">
+                Ver en Google Maps
+              </a>
+              <a href="#buses"
+                 class="inline-flex items-center justify-center rounded-xl bg-white px-5 py-3 text-neutral-900 font-medium ring-1 ring-neutral-200 hover:bg-neutral-100 transition">
+                Info de autobuses
+              </a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- BUSES -->
+      <section id="buses" class="pt-12 sm:pt-16">
+        <div class="rounded-2xl bg-neutral-900 text-white p-7 sm:p-9">
+          <h2 class="font-serif text-3xl sm:text-4xl">Servicio de autobuses</h2>
+          <p class="mt-4 text-neutral-200 max-w-3xl">
+            Para que no tengas que preocuparte por el coche, habrá un <span class="text-white font-medium">servicio de autobuses</span>
+            puesto por nosotros que realizará el traslado y el regreso al finalizar la fiesta.
+          </p>
+
+          <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-5">
+            <div class="rounded-xl bg-white/10 p-5 ring-1 ring-white/10">
+              <p class="text-sm text-neutral-200">Ruta</p>
+              <p class="mt-1 font-medium">Iglesia → Hacienda → [Punto de regreso]</p>
+            </div>
+            <div class="rounded-xl bg-white/10 p-5 ring-1 ring-white/10">
+              <p class="text-sm text-neutral-200">Horarios</p>
+              <p class="mt-1 font-medium">Salida: 12:15 · Regresos: [01:00] y [03:00]</p>
+            </div>
+          </div>
+
+          <p class="mt-6 text-neutral-200">
+            <span class="text-white font-medium">Importante:</span> más adelante confirmaremos horarios exactos.
+            Te pediremos que indiques si utilizarás el autobús para organizar plazas.
+          </p>
+        </div>
+      </section>
+
+      <!-- FOOTER -->
+      <footer class="pt-14 text-center text-sm text-neutral-500">
+        <p>Con cariño, Cris &amp; Álvaro.</p>
+      </footer>
+    </main>
+  </div>
+</body>
+</html>
+
