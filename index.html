@@ -105,7 +105,7 @@
           </div>
           <div class="rounded-2xl bg-white/80 backdrop-blur px-5 py-4 ring-1 ring-neutral-200">
             <p class="text-sm text-neutral-500">Celebración</p>
-            <p class="mt-1 font-medium">13:00 · Hacienda</p>
+            <p class="mt-1 font-medium">13:00 · Hacienda Mata del Herrador</p>
           </div>
         </div>
       </div>
@@ -255,7 +255,7 @@
                  class="inline-flex items-center justify-center rounded-xl bg-neutral-900 px-5 py-3 text-white font-medium hover:bg-neutral-800 transition">
                 Ver en Google Maps
               </a>
-              <a href="#buses"
+              <a href="https://maps.app.goo.gl/wcLavyBiSEu6cnZk7" target="_blank" rel="noopener"
                  class="inline-flex items-center justify-center rounded-xl bg-white px-5 py-3 text-neutral-900 font-medium ring-1 ring-neutral-200 hover:bg-neutral-100 transition">
                 Ver info parking
               </a>
@@ -309,7 +309,7 @@
             </div>
             <div class="rounded-xl bg-white/10 p-5 ring-1 ring-white/10">
               <p class="text-sm text-neutral-700">Horarios</p>
-              <p class="mt-1 font-medium">Salida: 12:30 · Regresos: [21:00] y [00:00]</p>
+              <p class="mt-1 font-medium">Salida: 12:30 · Regresos: [21:30] y [00:00]</p>
             </div>
             <div class="rounded-xl bg-white/10 p-5 ring-1 ring-white/10">
               <a href="https://maps.app.goo.gl/Mqar9GuwwqkGfR5j8" target="_blank" rel="noopener"
@@ -324,6 +324,145 @@
           </p>
         </div>
       </section>
+      <form id="rsvp-form" action="https://formspree.io/f/mzdkvezp" method="POST" class="max-w-sm mx-auto mt-10">
+        <label class="block mb-2 text-lg font-medium">
+          Número de asistentes
+        </label>
+        
+        <!-- Nombre -->
+        <input
+          type="text"
+          name="nombre"
+          required
+          placeholder="Nombre*"
+          class="w-full rounded-lg border border-gray-300 px-4 py-2 mb-2"
+        >
+
+        <!-- Apellidos -->
+        <input
+          type="text"
+          name="apellidos"
+          required
+          placeholder="Apellidos*"
+          class="w-full rounded-lg border border-gray-300 px-4 py-2 mb-2"
+        >
+
+        <!-- Número de asistentes -->
+        <input
+          type="number"
+          name="numero_asistentes"
+          min="1"
+          max="10"
+          required
+          placeholder="Número de asistentes*"
+          class="w-full rounded-lg border border-gray-300 px-4 py-2 mb-2"
+        >
+
+        
+        <!-- Nombres de los demás asistentes -->
+        <textarea
+          name="nombres_acompanantes"
+          placeholder="Nombre y apellidos de los demás asistentes"
+          class="w-full rounded-lg border border-gray-300 px-4 py-2 mb-4"
+        ></textarea>
+
+        <!-- Autobús ida -->
+        <label class="flex items-center gap-2 mb-4">
+          <input 
+          type="checkbox" name="bus_ida">
+          ¿Necesitas autobús de ida?
+        </label>
+
+        <!-- Autobús vuelta 21:00 -->
+        <label class="flex items-center gap-2 mb-4">
+          <input type="checkbox" name="bus_vuelta_21">
+          ¿Necesitas autobús de vuelta a las 21:00?
+        </label>
+
+        <!-- Autobús vuelta 00:00 -->
+        <label class="flex items-center gap-2 mb-8">
+          <input type="checkbox" name="bus_vuelta_00">
+          ¿Necesitas autobús de vuelta a las 00:00?
+        </label>
+
+        <!-- Alergias -->
+        <textarea
+          name="alergias"
+          placeholder="¿Alguna alergia alimenticia?"
+          class="w-full rounded-lg border border-gray-300 px-4 py-2 mb-4"
+        ></textarea>
+
+        
+        <!-- Pregunta divertida -->
+        <label class="block  mb-2">
+          ¿Estás preparado para ver lo guapa que va a ir Cris?
+        </label>
+        <select
+          name="cris_guapa"
+          required
+          class="w-full rounded-lg border px-4 py-2 mb-10"
+        >
+          <option value="">Selecciona una opción</option>
+          <option value="Si, totalmente">Nada te prepara para eso</option>
+          <option value="Necesitaré gafas de sol">Si, pero necesitaré gafas de sol 😎</option>
+        </select>
+
+
+
+        <button
+          type="submit"
+          class="w-full rounded-lg bg-[#990033] px-4 py-2 text-white hover:opacity-90"
+        >
+          Confirmar asistencia
+        </button>
+        
+        <p
+          id="form-success"
+          class="hidden mt-4 rounded-lg bg-green-100 px-4 py-3 text-green-800 text-center"
+        >
+          ¡Gracias por confirmar! 🤍 Nos vemos en el gran día
+        </p>
+
+        <p
+          id="form-error"
+          class="hidden mt-4 rounded-lg bg-red-100 px-4 py-3 text-red-800 text-center"
+        >
+          Ha ocurrido un error. Inténtalo de nuevo.
+        </p>
+      </form>
+
+      
+      <script>
+        const form = document.getElementById("rsvp-form");
+        const successMsg = document.getElementById("form-success");
+        const errorMsg = document.getElementById("form-error");
+
+        form.addEventListener("submit", async (e) => {
+          e.preventDefault();
+
+          const formData = new FormData(form);
+
+          try {
+            const response = await fetch(form.action, {
+              method: "POST",
+              body: formData,
+              headers: { "Accept": "application/json" }
+            });
+
+            if (response.ok) {
+              form.reset();
+              successMsg.classList.remove("hidden");
+              errorMsg.classList.add("hidden");
+            } else {
+              throw new Error();
+            }
+          } catch {
+            errorMsg.classList.remove("hidden");
+            successMsg.classList.add("hidden");
+            successMsg.scrollIntoView({ behavior: "smooth", block: "center" });
+          }
+        });
+      </script>
 
       <!-- FOOTER -->
       <footer class="pt-14 text-center text-sm text-neutral-500">
