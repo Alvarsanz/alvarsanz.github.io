@@ -12,14 +12,17 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cookie&display=swap" rel="stylesheet">
 
   <style>
     :root{
       --serif: "Playfair Display", serif;
       --sans: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
+      --cookie: "Cookie", cursive;
     }
     .font-serif { font-family: var(--serif); }
     .font-sans { font-family: var(--sans); }
+    .font-cookie-iban { font-family: var(--cookie); }
     summary::-webkit-details-marker { display: none; }
   </style>
 </head>
@@ -80,6 +83,7 @@
         <img src="assets/img/MainImage.JPG" alt="Álvaro y Cris"
             class="mt-6 w-full max-w-xl mx-auto rounded-3xl shadow-lg">
 
+
         <p class="mt-10 text-lg sm:text-xl text-neutral-700 max-w-2xl">
           <p class="mb-4">¡NOS CASAMOS!, queremos invitarte a compartir con nosotros un día muy especial.
           Aqui te dejamos toda la info y el formulario de confirmación.</p>
@@ -118,12 +122,61 @@
     <main class="mx-auto max-w-4xl px-6 pb-16">
       <!-- DETALLES -->
      <!-- CONTENIDO -->
-  <section id="momentos" class="pt-10 sm:pt-14">
-    <h2 class="font-serif text-3xl sm:text-4xl mb-8">Momentos clave</h2>
+  <!-- Cuenta atrás -->
+  <div class="pt-2 sm:pt-4 text-center">
+    <p class="text-xs uppercase tracking-[0.3em] text-neutral-400 mb-4">10/10/2026</p>
+    <p class="text-xs uppercase tracking-[0.3em] text-neutral-400 mb-4">Faltan</p>
+    <div class="inline-flex gap-6">
+      <div>
+        <p id="cd-days" class="font-serif text-4xl text-neutral-800">--</p>
+        <p class="text-xs text-neutral-400 mt-1 uppercase tracking-widest">Días</p>
+      </div>
+      <span class="font-serif text-3xl text-neutral-300 self-start mt-1">·</span>
+      <div>
+        <p id="cd-hours" class="font-serif text-4xl text-neutral-800">--</p>
+        <p class="text-xs text-neutral-400 mt-1 uppercase tracking-widest">Horas</p>
+      </div>
+      <span class="font-serif text-3xl text-neutral-300 self-start mt-1">·</span>
+      <div>
+        <p id="cd-minutes" class="font-serif text-4xl text-neutral-800">--</p>
+        <p class="text-xs text-neutral-400 mt-1 uppercase tracking-widest">Min</p>
+      </div>
+      <span class="font-serif text-3xl text-neutral-300 self-start mt-1">·</span>
+      <div>
+        <p id="cd-seconds" class="font-serif text-4xl text-neutral-800">--</p>
+        <p class="text-xs text-neutral-400 mt-1 uppercase tracking-widest">Seg</p>
+      </div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      const target = new Date("2026-10-10T11:00:00");
+      function update() {
+        const diff = target - Date.now();
+        if (diff <= 0) {
+          ["cd-days","cd-hours","cd-minutes","cd-seconds"].forEach(id => document.getElementById(id).textContent = "0");
+          return;
+        }
+        const d = Math.floor(diff / 86400000);
+        const h = Math.floor((diff % 86400000) / 3600000);
+        const m = Math.floor((diff % 3600000) / 60000);
+        const s = Math.floor((diff % 60000) / 1000);
+        document.getElementById("cd-days").textContent = d;
+        document.getElementById("cd-hours").textContent = String(h).padStart(2,"0");
+        document.getElementById("cd-minutes").textContent = String(m).padStart(2,"0");
+        document.getElementById("cd-seconds").textContent = String(s).padStart(2,"0");
+      }
+      update();
+      setInterval(update, 1000);
+    })();
+  </script>
+
+  <section id="momentos" class="pt-14 sm:pt-18">
+    <h2 class="font-serif text-3xl sm:text-4xl mb-16">Momentos clave</h2>
 
     <!-- Línea vertical (sin azul) -->
     <ol class="relative mx-auto max-w-2xl px-6">
-      <span class="absolute left-1/2 top-0 h-full -translate-x-1/2 border-l-2 border-[#990033]/25"></span>
+      
 
       <!-- Evento -->
       <li class="relative ml-6 pb-10">
@@ -207,7 +260,7 @@
         </span>
 
         <div class="pl-12 text-right">
-          <h3 class="font-serif text-2xl">Vuelta fresitas</h3>
+          <h3 class="font-serif text-2xl">Vuelta temprana</h3>
           <p class="text-lg text-neutral-700">Primer autobus de vuelta</p>
         </div>
       </li>
@@ -297,15 +350,15 @@
 
       <!-- BUSES -->
       <section id="buses" class="pt-12 sm:pt-16">
-        <div class="rounded-2xl bg-white p-6 ring-1 ring-neutral-200 mb-6"> 
           <h2 class="font-serif text-3xl sm:text-4xl">Servicio de autobuses</h2>
-          <p class="mt-4 text-neutral-700 max-w-3xl">
+          <p class="mt-3 text-neutral-700 max-w-3xl">
             Para que no tengas que preocuparte por el coche, pondremos a vuestra disposición un servicio de autobuses
             que realizará el traslado desde la iglesia a la hacienda y el regreso a dos horas distintas para que puedas 
             elegir la que mejor se adapte a tus planes.
           </p>
 
-          <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div class="rounded-2xl bg-white p-6 ring-1 ring-neutral-200 mb-6 mt-6">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
             <div class="rounded-xl bg-white/10 p-5 ring-1 ring-white/10">
               <p class="text-sm text-neutral-700">Ruta</p>
               <p class="mt-1 font-medium">Iglesia → Hacienda → Iglesia</p>
@@ -321,15 +374,104 @@
             </a>
           </div>
 
+          </div><!-- fin grid -->
+
           <p class="mt-6 text-neutral-700">
             <span class="text-black-700 font-serif">Importante: más adelante confirmaremos horarios exactos.
             Por favor, indícanos si usarás el autobús para organizar las plazas.
           </p>
         </div>
       </section>
-      <div class="rounded-2xl bg-white p-6 ring-1 ring-neutral-200 mb-4"> 
-      <h2 class="font-serif text-3xl sm:text-4xl">Formulario de confirmación</h2>
+<section id="detalles" class="pt-10 sm:pt-14 mb-10">
+        <h2 class="font-serif text-3xl sm:text-4xl">Dress Code</h2>
+        <p class="mt-3 text-neutral-700 max-w-2xl">
+          Te dejamos unos consejos para que estés cómodo y guapo el día de la boda.
+        </p>
+
+        <div class="mt-8 grid grid-cols-2 md:grid-cols-2 gap-6">
+          <!-- MUJERES -->
+          <article class="rounded-2xl bg-white p-6 ring-1 ring-neutral-200">
+            <div class="flex items-center justify-between gap-4">
+              <h3 class="font-serif text-2xl">ELLAS
+              </h3>
+            </div>
+          
+
+            <div class="mt-4 grid grid-cols-1 sm:grid-cols-1 gap-6">
+              <!-- CÓMO SÍ IR -->
+              <div class="rounded-xl bg-emerald-50 p-4 ring-1 ring-emerald-100">
+                <h4 class="font-semibold text-emerald-900">Cómo estaré guapa</h4>
+                <ul class="mt-2 list-disc pl-5 space-y-1 text-emerald-950">
+                  <li>Vestido corto, midi o mono</li>
+                  <li>Evita tacones demasiado finos o llévate unos para cambiarte, habrá zona de césped y albero y no queremos que te hundas</li>
+                  <li>Unas cuñas son ideales y cómodas</li>
+                </ul>
+              </div>
+
+              <!-- CÓMO NO IR -->
+              <div class="rounded-xl bg-rose-50 p-4 ring-1 ring-rose-100">
+                <h4 class="font-semibold text-rose-900">Cómo NO estaré guapa</h4>
+                <ul class="mt-2 list-disc pl-5 space-y-1 text-rose-950">
+                  <li>Ir de BLANCO (reservado para la novia)</li>
+                  <li>Colores beige, marfil, nude, champagne y ese rosa tan clarito tan bonito que viste en Insta tampoco lucen bien</li>
+                  <li>Ir de negro</li>
+                  <li>Looks demasiado casual</li>
+                </ul>
+              </div>
+          </div>
+
+
+          </article>
+
+          
+          <!-- HOMBRES -->
+          <article class="rounded-2xl bg-white p-6 ring-1 ring-neutral-200">
+            <div class="flex items-center justify-between gap-4">
+              <h3 class="font-serif text-2xl">ELLOS</h3>
+            </div>
+
+            <div class="mt-4 grid grid-cols-1 sm:grid-cols-1 gap-6">
+              <!-- CÓMO SÍ IR -->
+              <div class="rounded-xl bg-emerald-50 p-4 ring-1 ring-emerald-100">
+                <h4 class="font-semibold text-emerald-900">Cómo estaré guapo</h4>
+                <ul class="mt-2 list-disc pl-5 space-y-1 text-emerald-950">
+                  <li>Traje completo o chaqueta con pantalón de vestir</li>
+                  <li>Trae corbata que no es para tanto</li>
+                </ul>
+              </div>
+
+              <!-- CÓMO NO IR -->
+              <div class="rounded-xl bg-rose-50 p-4 ring-1 ring-rose-100">
+                <h4 class="font-semibold text-rose-900">Cómo NO estaré guapo</h4>
+                <ul class="mt-2 list-disc pl-5 space-y-1 text-rose-950">
+                  <li>Polo o camiseta (estamos en Sevilla, un poco de por favor)</li>
+                  <li>Vaqueros, ropa deportiva o chandal del Betis</li>                  
+                </ul>
+              </div>
+          </div>
+
+
+          </article>
+        </div>
+      </section>
+
+      <section id="detalles" class="pt-10 sm:pt-14 mb-10">
+        <h2 class="font-serif text-3xl sm:text-4xl">Regalo</h2> 
+         <p class="mt-3 text-neutral-700 max-w-2xl">
+          Sin vosotros no sería igual. Gracias por vuestra compañia en esta nueva etapa que comenzamos. Lo importante es que vengáis con ilusión, alegría y ganas de pasarlo bien, pero si queréis hacernos un regalo, aquí os dejamos nuestra cuenta
+        </p>  
+      <div class="mt-8 rounded-2xl bg-white p-6 ring-1 ring-neutral-200 mb-4 text-center">
+        <p class="font-cookie-iban text-3xl sm:text-4xl text-neutral-700 mb-3 tracking-widest">¡Gracias!</p>
+        <p class="rounded-lg text-lg text-neutral-900">ES00 0000 0000 00 0000000000</p>
       </div>
+      </section>
+
+      <section id="rsvp" class="pt-10 sm:pt-14">
+        <h2 class="font-serif text-3xl sm:text-4xl">Formulario de confirmación</h2>
+        <p class="mt-3 text-neutral-700 max-w-2xl">
+          Por favor, rellena un formulario por persona que asista. Así podremos tener todo bien organizado para ese día.
+        </p>
+      </section>
       <form id="rsvp-form" action="https://formspree.io/f/mzdkvezp" method="POST" class="max-w-sm mx-auto mt-10">
         <label class="block mb-2 text-lg font-medium">
           Número de asistentes
@@ -352,25 +494,6 @@
           placeholder="Apellidos*"
           class="w-full rounded-lg border border-gray-300 px-4 py-2 mb-2"
         >
-
-        <!-- Número de asistentes -->
-        <input
-          type="number"
-          name="numero_asistentes"
-          min="1"
-          max="10"
-          required
-          placeholder="Número de asistentes*"
-          class="w-full rounded-lg border border-gray-300 px-4 py-2 mb-2"
-        >
-
-        
-        <!-- Nombres de los demás asistentes -->
-        <textarea
-          name="nombres_acompanantes"
-          placeholder="Nombre y apellidos de los demás asistentes"
-          class="w-full rounded-lg border border-gray-300 px-4 py-2 mb-4"
-        ></textarea>
 
         <!-- Autobús ida -->
         <label class="flex items-center gap-2 mb-4">
@@ -426,7 +549,7 @@
           id="form-success"
           class="hidden mt-4 rounded-lg bg-green-100 px-4 py-3 text-green-800 text-center"
         >
-          ¡Gracias por confirmar! 🤍 Nos vemos en el gran día
+          ¡Respuesta guardada para <span id="saved-name" class="font-semibold"></span>! 🤍 Puedes añadir otra persona.
         </p>
 
         <p
@@ -442,11 +565,13 @@
         const form = document.getElementById("rsvp-form");
         const successMsg = document.getElementById("form-success");
         const errorMsg = document.getElementById("form-error");
+        const savedNameSpan = document.getElementById("saved-name");
 
         form.addEventListener("submit", async (e) => {
           e.preventDefault();
 
           const formData = new FormData(form);
+          const nombre = formData.get("nombre");
 
           try {
             const response = await fetch(form.action, {
@@ -456,16 +581,18 @@
             });
 
             if (response.ok) {
+              savedNameSpan.textContent = nombre;
               form.reset();
               successMsg.classList.remove("hidden");
               errorMsg.classList.add("hidden");
+              successMsg.scrollIntoView({ behavior: "smooth", block: "center" });
             } else {
               throw new Error();
             }
           } catch {
             errorMsg.classList.remove("hidden");
             successMsg.classList.add("hidden");
-            successMsg.scrollIntoView({ behavior: "smooth", block: "center" });
+            errorMsg.scrollIntoView({ behavior: "smooth", block: "center" });
           }
         });
       </script>
