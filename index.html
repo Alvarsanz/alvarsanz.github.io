@@ -489,7 +489,7 @@
           Por favor, rellena un formulario por persona que asista. Así podremos tener todo bien organizado para ese día.
         </p>
       </section>
-      <form id="rsvp-form" action="https://formspree.io/f/mzdkvezp" method="POST" class="max-w-sm mx-auto mt-10">
+      <form id="rsvp-form" class="max-w-sm mx-auto mt-10">
         <label class="block mb-2 text-lg font-medium">
           Datos
         </label>
@@ -575,54 +575,34 @@
           Confirmar asistencia
         </button>
         
-        <p
-          id="form-success"
-          class="hidden mt-4 rounded-lg bg-green-100 px-4 py-3 text-green-800 text-center"
-        >
-          ¡Respuesta guardada para <span id="saved-name" class="font-semibold"></span>! 🤍 Puedes añadir otra persona.
-        </p>
-
-        <p
-          id="form-error"
-          class="hidden mt-4 rounded-lg bg-red-100 px-4 py-3 text-red-800 text-center"
-        >
-          Ha ocurrido un error. Inténtalo de nuevo.
-        </p>
+        <p id="status" class="mt-4 text-center text-sm text-neutral-700"></p>
       </form>
 
       
       <script>
         const form = document.getElementById("rsvp-form");
-        const successMsg = document.getElementById("form-success");
-        const errorMsg = document.getElementById("form-error");
-        const savedNameSpan = document.getElementById("saved-name");
+        const statusEl = document.getElementById("status");
+        const endpoint = "https://script.google.com/macros/s/AKfycbyl4J9vtb1GhvlG4dWVhSk_ellW4J9AMYDrjpfVgpto1b90CJ_pe7v93fAlsAZwS3XA/exec";
 
         form.addEventListener("submit", async (e) => {
           e.preventDefault();
+          statusEl.textContent = "Enviando...";
 
           const formData = new FormData(form);
-          const nombre = formData.get("nombre");
+          const payload = Object.fromEntries(formData.entries());
 
           try {
-            const response = await fetch(form.action, {
+            const res = await fetch(endpoint, {
               method: "POST",
-              body: formData,
-              headers: { "Accept": "application/json" }
+              body: JSON.stringify(payload),
+              headers: { "Content-Type": "application/json" },
             });
 
-            if (response.ok) {
-              savedNameSpan.textContent = nombre;
-              form.reset();
-              successMsg.classList.remove("hidden");
-              errorMsg.classList.add("hidden");
-              successMsg.scrollIntoView({ behavior: "smooth", block: "center" });
-            } else {
-              throw new Error();
-            }
-          } catch {
-            errorMsg.classList.remove("hidden");
-            successMsg.classList.add("hidden");
-            errorMsg.scrollIntoView({ behavior: "smooth", block: "center" });
+            if (!res.ok) throw new Error("Error en el envío");
+            statusEl.textContent = "¡Enviado! Gracias 🙂";
+            form.reset();
+          } catch (err) {
+            statusEl.textContent = "No se pudo enviar. Intenta de nuevo.";
           }
         });
       </script>
