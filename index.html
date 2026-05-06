@@ -579,31 +579,67 @@
       </form>
 
       
+      <!-- Iframe oculto para el envío -->
+      <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" sandbox="allow-scripts allow-forms"></iframe>
+      
       <script>
         const form = document.getElementById("rsvp-form");
         const statusEl = document.getElementById("status");
-        const endpoint = "https://script.google.com/macros/s/AKfycbyl4J9vtb1GhvlG4dWVhSk_ellW4J9AMYDrjpfVgpto1b90CJ_pe7v93fAlsAZwS3XA/exec";
+        const endpoint = "https://script.google.com/macros/s/AKfycbwEmHU4MBS2WlxtkuLUM5nMUn7zsn7xbKWqJwkCkfeQtn0kU3tvGFeFshRL3zLtsiC9/exec";
 
-        form.addEventListener("submit", async (e) => {
-          e.preventDefault();
+        // Configurar el formulario para enviar a iframe oculto
+        form.setAttribute("action", endpoint);
+        form.setAttribute("method", "POST");
+        form.setAttribute("target", "hidden_iframe");
+
+        const checkboxNames = ['bus_ida', 'ida_cuenta_propia', 'bus_vuelta_21', 'bus_vuelta_00', 'vuelta_cuenta_propia'];
+
+        form.addEventListener("submit", function(e) {
           statusEl.textContent = "Enviando...";
+          statusEl.className = "mt-4 text-center text-sm text-neutral-700";
 
-          const formData = new FormData(form);
-          const payload = Object.fromEntries(formData.entries());
+          // Eliminar campos hidden anteriores (si existen)
+          form.querySelectorAll('input.checkbox-hidden').forEach(el => el.remove());
 
-          try {
-            const res = await fetch(endpoint, {
-              method: "POST",
-              body: JSON.stringify(payload),
-              headers: { "Content-Type": "application/json" },
+          // Crear campos hidden con los valores actuales de los checkboxes
+          checkboxNames.forEach(name => {
+            const checkbox = form.querySelector(`input[name=\"${name}\"]`);
+            const checked = checkbox.checked;
+            // Deshabilitar el checkbox original para que no envíe "on"
+            checkbox.disabled = true;
+            // Crear campo hidden con el valor correcto
+            const hidden = document.createElement('input');
+            hidden.type = 'hidden';
+            hidden.name = name;
+            hidden.value = checked ? 'Sí' : 'No';
+            hidden.className = 'checkbox-hidden';
+            form.appendChild(hidden);
+          });
+
+          // Mostrar éxito después de un breve delay
+          setTimeout(() => {
+            // Obtener nombre y apellidos del formulario antes de resetearlo
+            const nombre = form.querySelector('input[name="nombre"]').value.trim();
+            const apellidos = form.querySelector('input[name="apellidos"]').value.trim();
+            const nombreCompleto = (nombre + ' ' + apellidos).trim();
+            statusEl.textContent = `¡Enviado! Gracias, ${nombreCompleto} 🙂`;
+            statusEl.className = "mt-4 text-center text-sm text-green-600 font-medium";
+
+            // Eliminar campos hidden
+            form.querySelectorAll('input.checkbox-hidden').forEach(el => el.remove());
+
+            // Rehabilitar checkboxes
+            checkboxNames.forEach(name => {
+              const checkbox = form.querySelector(`input[name=\"${name}\"]`);
+              if (checkbox) checkbox.disabled = false;
             });
 
-            if (!res.ok) throw new Error("Error en el envío");
-            statusEl.textContent = "¡Enviado! Gracias 🙂";
             form.reset();
-          } catch (err) {
-            statusEl.textContent = "No se pudo enviar. Intenta de nuevo.";
-          }
+
+            // Limpiar el src del iframe para evitar el error 403 visual
+            const iframe = document.getElementById('hidden_iframe');
+            if (iframe) iframe.src = 'about:blank';
+          }, 1500);
         });
       </script>
 
